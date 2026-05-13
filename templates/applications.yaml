@@ -1,4 +1,5 @@
 {{- $envTag := .Values.envTag -}}
+{{- $nameTag := index (splitList "-" $envTag) 0 -}}
 {{- $domain := .Values.domain -}}
 {{- $namespace := .Values.namespace -}}
 {{- $repoURL := .Values.repoURL -}}
@@ -11,6 +12,7 @@
   {{- $backofficeHost = printf "backoffice.%s" $domain -}}
   {{- $storefrontHost = printf "storefront.%s" $domain -}}
   {{- $apiHost = printf "api.%s" $domain -}}
+  {{- $nameTag = "" -}}
 {{- end }}
 
 # --- Applications Definitions ---
@@ -20,7 +22,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "yas-configuration-%s" $envTag }}
+  name: {{ printf "yas-configuration-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
@@ -73,7 +75,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "backoffice-bff-%s" $envTag }}
+  name: {{ printf "backoffice-bff-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "0"
@@ -117,7 +119,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "backoffice-ui-%s" $envTag }}
+  name: {{ printf "backoffice-ui-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -150,7 +152,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "storefront-bff-%s" $envTag }}
+  name: {{ printf "storefront-bff-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "0"
@@ -194,7 +196,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "storefront-ui-%s" $envTag }}
+  name: {{ printf "storefront-ui-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -227,7 +229,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "swagger-ui-%s" $envTag }}
+  name: {{ printf "swagger-ui-%s" $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -257,7 +259,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ printf "%s-%s" $service $envTag }}
+  name: {{ printf "%s-%s" $service $nameTag }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
