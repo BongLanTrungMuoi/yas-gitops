@@ -1,0 +1,247 @@
+{{- $envTag := .Values.envTag -}}
+{{- $domain := .Values.domain -}}
+{{- $namespace := .Values.namespace -}}
+{{- $repoURL := .Values.repoURL -}}
+{{- $targetRevision := .Values.targetRevision -}}
+
+{{- $backofficeHost := printf "backoffice-%s.%s" $envTag $domain -}}
+{{- $storefrontHost := printf "storefront-%s.%s" $envTag $domain -}}
+{{- $apiHost := printf "api-%s.%s" $envTag $domain -}}
+{{- if not $envTag }}
+  {{- $backofficeHost = printf "backoffice.%s" $domain -}}
+  {{- $storefrontHost = printf "storefront.%s" $domain -}}
+  {{- $apiHost = printf "api.%s" $domain -}}
+{{- end }}
+
+{{- $coreServices := list "cart" "customer" "inventory" "location" "media" "order" "payment" "product" "promotion" "rating" "search" "tax" "recommendation" "webhook" "sampledata" -}}
+
+# --- Applications Definitions ---
+
+# 1. yas-configuration
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "yas-configuration-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/yas-configuration
+    helm:
+      parameters:
+        - name: global.domain
+          value: {{ $domain }}
+        - name: global.envTag
+          value: {{ $envTag }}
+        - name: image.tag
+          value: {{ index .Values.services "yas-configuration" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+# 2. backoffice-bff
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "backoffice-bff-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/backoffice-bff
+    helm:
+      parameters:
+        - name: backend.ingress.host
+          value: {{ $backofficeHost }}
+        - name: global.domain
+          value: {{ $domain }}
+        - name: global.envTag
+          value: {{ $envTag }}
+        - name: image.tag
+          value: {{ index .Values.services "backoffice-bff" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# 3. backoffice-ui
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "backoffice-ui-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/backoffice-ui
+    helm:
+      parameters:
+        - name: ingress.host
+          value: {{ $backofficeHost }}
+        - name: ui.extraEnvs[0].name
+          value: API_BASE_PATH
+        - name: ui.extraEnvs[0].value
+          value: "http://{{ $backofficeHost }}/api"
+        - name: image.tag
+          value: {{ index .Values.services "backoffice-ui" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# 4. storefront-bff
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "storefront-bff-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/storefront-bff
+    helm:
+      parameters:
+        - name: backend.ingress.host
+          value: {{ $storefrontHost }}
+        - name: global.domain
+          value: {{ $domain }}
+        - name: global.envTag
+          value: {{ $envTag }}
+        - name: image.tag
+          value: {{ index .Values.services "storefront-bff" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# 5. storefront-ui
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "storefront-ui-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/storefront-ui
+    helm:
+      parameters:
+        - name: ingress.host
+          value: {{ $storefrontHost }}
+        - name: ui.extraEnvs[0].name
+          value: API_BASE_PATH
+        - name: ui.extraEnvs[0].value
+          value: "http://{{ $storefrontHost }}/api"
+        - name: image.tag
+          value: {{ index .Values.services "storefront-ui" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# 6. swagger-ui
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "swagger-ui-%s" $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/swagger-ui
+    helm:
+      parameters:
+        - name: ingress.host
+          value: {{ $apiHost }}
+        - name: image.tag
+          value: {{ index .Values.services "swagger-ui" "tag" | default .Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# 7. Core Microservices
+{{- range $service := $coreServices }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "%s-%s" $service $envTag }}
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: {{ $repoURL }}
+    targetRevision: {{ $targetRevision }}
+    path: k8s-cd/charts/{{ $service }}
+    helm:
+      parameters:
+        - name: backend.ingress.host
+          value: {{ $apiHost }}
+        - name: global.domain
+          value: {{ $domain }}
+        - name: global.envTag
+          value: {{ $envTag }}
+        - name: image.tag
+          value: {{ index $.Values.services $service "tag" | default $.Values.global.image.tag }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ $namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{- end }}

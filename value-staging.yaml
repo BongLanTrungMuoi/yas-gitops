@@ -1,0 +1,35 @@
+# value-staging.yaml
+domain: "yas.staging.local"
+envTag: "staging"
+namespace: "yas-staging"
+repoURL: "https://github.com/BongLanTrungMuoi/yas-CI-CD.git"
+targetRevision: main # Thường sẽ trỏ tới một tag cụ thể hoặc branch release trong thực tế
+
+# Default image tags for staging
+global:
+  image:
+    tag: "v1.0.0" # Hoặc tag release tương ứng
+
+services:
+  yas-configuration: { tag: "v1.0.0" }
+  backoffice-bff: { tag: "v1.0.0" }
+  backoffice-ui: { tag: "v1.0.0" }
+  storefront-bff: { tag: "v1.0.0" }
+  storefront-ui: { tag: "v1.0.0" }
+  swagger-ui: { tag: "v1.0.0" }
+  cart: { tag: "v1.0.0" }
+  customer: { tag: "v1.0.0" }
+  inventory: { tag: "v1.0.0" }
+  location: { tag: "v1.0.0" }
+  media: { tag: "v1.0.0" }
+  order: { tag: "v1.0.0" }
+  payment: { tag: "v1.0.0" }
+  product: { tag: "v1.0.0" }
+  promotion: { tag: "v1.0.0" }
+  rating: { tag: "v1.0.0" }
+  search: { tag: "v1.0.0" }
+  tax: { tag: "v1.0.0" }
+  recommendation: { tag: "v1.0.0" }
+  webhook: { tag: "v1.0.0" }
+  sampledata: { tag: "v1.0.0" }
+
