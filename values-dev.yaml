@@ -27,6 +27,7 @@ coreServices:
 # Default image tags for dev
 global:
   image:
+    registry: "melyen"
     tag: "latest"
 
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)

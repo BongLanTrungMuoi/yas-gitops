@@ -38,6 +38,8 @@ spec:
           value: {{ $domain }}
         - name: global.envTag
           value: {{ $envTag }}
+        - name: image.repository
+          value: {{ printf "%s/yas-configuration" $.Values.global.image.registry }}
         - name: image.tag
           value: {{ index .Values.services "yas-configuration" "tag" | default .Values.global.image.tag }}
         # Tối ưu cho Java Startup
@@ -101,6 +103,8 @@ spec:
           value: {{ $domain }}
         - name: global.envTag
           value: {{ $envTag }}
+        - name: backend.image.repository
+          value: {{ printf "%s/yas-backoffice-bff" $.Values.global.image.registry }}
         - name: image.tag
           value: {{ index .Values.services "backoffice-bff" "tag" | default .Values.global.image.tag }}
         - name: backend.readinessProbe.initialDelaySeconds
@@ -147,6 +151,8 @@ spec:
           value: API_BASE_PATH
         - name: ui.extraEnvs[0].value
           value: "http://{{ $backofficeHost }}/api"
+        - name: ui.image.repository
+          value: {{ printf "%s/yas-backoffice-ui" $.Values.global.image.registry }}
         - name: image.tag
           value: {{ index .Values.services "backoffice-ui" "tag" | default .Values.global.image.tag }}
   destination:
@@ -180,6 +186,8 @@ spec:
           value: {{ $domain }}
         - name: global.envTag
           value: {{ $envTag }}
+        - name: backend.image.repository
+          value: {{ printf "%s/yas-storefront-bff" $.Values.global.image.registry }}
         - name: image.tag
           value: {{ index .Values.services "storefront-bff" "tag" | default .Values.global.image.tag }}
         - name: backend.readinessProbe.initialDelaySeconds
@@ -226,6 +234,8 @@ spec:
           value: API_BASE_PATH
         - name: ui.extraEnvs[0].value
           value: "http://{{ $storefrontHost }}/api"
+        - name: ui.image.repository
+          value: {{ printf "%s/yas-storefront-ui" $.Values.global.image.registry }}
         - name: image.tag
           value: {{ index .Values.services "storefront-ui" "tag" | default .Values.global.image.tag }}
   destination:
@@ -255,6 +265,8 @@ spec:
       parameters:
         - name: ingress.host
           value: {{ $apiHost }}
+        - name: image.repository
+          value: {{ printf "%s/swagger-ui" $.Values.global.image.registry | default "swaggerapi" }}
         - name: image.tag
           value: {{ index .Values.services "swagger-ui" "tag" | default .Values.global.image.tag }}
   destination:
@@ -289,6 +301,8 @@ spec:
           value: {{ $domain }}
         - name: global.envTag
           value: {{ $envTag }}
+        - name: backend.image.repository
+          value: {{ printf "%s/yas-%s" $.Values.global.image.registry $service }}
         - name: image.tag
           value: {{ index $.Values.services $service "tag" | default $.Values.global.image.tag }}
         # Core microservices thường nặng, cần thời gian khởi động lâu hơn
