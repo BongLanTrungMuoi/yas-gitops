@@ -55,8 +55,12 @@ spec:
         # Trỏ Redis sang namespace infraNamespace cho các BFF
         - name: backofficeBffExtraConfig.spring.data.redis.host
           value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
+        - name: backofficeBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
+          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
         - name: storefrontBffExtraConfig.spring.data.redis.host
           value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
+        - name: storefrontBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
+          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
         # Trỏ Kafka sang namespace infraNamespace
         - name: applicationConfig.spring.kafka.bootstrap-servers
           value: "kafka-cluster-kafka-bootstrap.{{ .Values.infraNamespace }}.svc.cluster.local:9092"
@@ -106,10 +110,6 @@ spec:
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
-        - name: backofficeBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
-        - name: backofficeBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
-          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -187,10 +187,6 @@ spec:
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
-        - name: storefrontBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
-        - name: storefrontBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
-          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
