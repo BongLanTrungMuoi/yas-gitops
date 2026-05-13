@@ -22,7 +22,7 @@ coreServices:
   - recommendation
   - webhook
   - sampledata
-  - payment-paypal
+  # - payment-paypal
 
 # Default image tags for staging
 global:
@@ -51,5 +51,4 @@ services:
   recommendation: { tag: "v1.0.0" }
   webhook: { tag: "v1.0.0" }
   sampledata: { tag: "v1.0.0" }
-  payment-paypal: { tag: "v1.0.0" }
-
+  # payment-paypal: { tag: "v1.0.0" }

@@ -22,7 +22,7 @@ coreServices:
   - recommendation
   - webhook
   - sampledata
-  - payment-paypal
+  # - payment-paypal (Removed due to broken image)
 
 # Default image tags for dev
 global:
@@ -52,4 +52,4 @@ services:
   recommendation: { tag: "latest" }
   webhook: { tag: "latest" }
   sampledata: { tag: "latest" }
-  payment-paypal: { tag: "latest" }
+  # payment-paypal: { tag: "latest" }
