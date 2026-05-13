@@ -42,13 +42,13 @@ spec:
           value: {{ index .Values.services "yas-configuration" "tag" | default .Values.global.image.tag }}
         # Tối ưu cho Java Startup
         - name: readinessProbe.initialDelaySeconds
-          value: "60"
+          value: "180"
         - name: livenessProbe.initialDelaySeconds
-          value: "90"
+          value: "240"
         - name: readinessProbe.failureThreshold
-          value: "10"
+          value: "15"
         - name: livenessProbe.failureThreshold
-          value: "10"
+          value: "15"
         # Trỏ sang Keycloak ở namespace infraNamespace
         - name: applicationConfig.spring.lifecycle.timeout-per-shutdown-phase
           value: "30s"
@@ -96,13 +96,13 @@ spec:
         - name: image.tag
           value: {{ index .Values.services "backoffice-bff" "tag" | default .Values.global.image.tag }}
         - name: backend.readinessProbe.initialDelaySeconds
-          value: "90"
+          value: "240"
         - name: backend.livenessProbe.initialDelaySeconds
-          value: "120"
+          value: "300"
         - name: backend.readinessProbe.failureThreshold
-          value: "10"
+          value: "15"
         - name: backend.livenessProbe.failureThreshold
-          value: "10"
+          value: "15"
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
@@ -173,13 +173,13 @@ spec:
         - name: image.tag
           value: {{ index .Values.services "storefront-bff" "tag" | default .Values.global.image.tag }}
         - name: backend.readinessProbe.initialDelaySeconds
-          value: "90"
+          value: "240"
         - name: backend.livenessProbe.initialDelaySeconds
-          value: "120"
+          value: "300"
         - name: backend.readinessProbe.failureThreshold
-          value: "10"
+          value: "15"
         - name: backend.livenessProbe.failureThreshold
-          value: "10"
+          value: "15"
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
@@ -281,13 +281,13 @@ spec:
           value: {{ index $.Values.services $service "tag" | default $.Values.global.image.tag }}
         # Core microservices thường nặng, cần thời gian khởi động lâu hơn
         - name: backend.readinessProbe.initialDelaySeconds
-          value: "90"
+          value: "300"
         - name: backend.livenessProbe.initialDelaySeconds
-          value: "120"
+          value: "360"
         - name: backend.readinessProbe.failureThreshold
-          value: "10"
+          value: "20"
         - name: backend.livenessProbe.failureThreshold
-          value: "10"
+          value: "20"
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432"
