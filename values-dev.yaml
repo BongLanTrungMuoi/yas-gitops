@@ -2,8 +2,26 @@
 domain: "yas.dev.local"
 envTag: "dev"
 namespace: "yas-dev"
+infraNamespace: "yas-13"
 repoURL: "https://github.com/BongLanTrungMuoi/yas-CI-CD.git"
 targetRevision: main
+
+coreServices:
+  - cart
+  - customer
+  - inventory
+  - location
+  - media
+  - order
+  - payment
+  - product
+  - promotion
+  - rating
+  - search
+  - tax
+  - recommendation
+  - webhook
+  - sampledata
 
 # Default image tags for dev
 global:

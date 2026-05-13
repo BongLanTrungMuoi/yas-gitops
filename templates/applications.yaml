@@ -13,8 +13,6 @@
   {{- $apiHost = printf "api.%s" $domain -}}
 {{- end }}
 
-{{- $coreServices := list "cart" "customer" "inventory" "location" "media" "order" "payment" "product" "promotion" "rating" "search" "tax" "recommendation" "webhook" "sampledata" -}}
-
 # --- Applications Definitions ---
 
 # 1. yas-configuration
@@ -49,19 +47,19 @@ spec:
           value: "10"
         - name: livenessProbe.failureThreshold
           value: "10"
-        # Trỏ sang Keycloak ở namespace yas-13
+        # Trỏ sang Keycloak ở namespace infraNamespace
         - name: applicationConfig.spring.security.oauth2.resourceserver.jwt.issuer-uri
-          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
+          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
         - name: applicationConfig.spring.lifecycle.timeout-per-shutdown-phase
           value: "30s"
-        # Trỏ Redis sang namespace yas-13 cho các BFF
+        # Trỏ Redis sang namespace infraNamespace cho các BFF
         - name: backofficeBffExtraConfig.spring.data.redis.host
-          value: "redis-master.yas-13.svc.cluster.local"
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
         - name: storefrontBffExtraConfig.spring.data.redis.host
-          value: "redis-master.yas-13.svc.cluster.local"
-        # Trỏ Kafka sang namespace yas-13
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
+        # Trỏ Kafka sang namespace infraNamespace
         - name: applicationConfig.spring.kafka.bootstrap-servers
-          value: "kafka-cluster-kafka-bootstrap.yas-13.svc.cluster.local:9092"
+          value: "kafka-cluster-kafka-bootstrap.{{ .Values.infraNamespace }}.svc.cluster.local:9092"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -80,7 +78,7 @@ metadata:
   name: {{ printf "backoffice-bff-%s" $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
@@ -105,13 +103,13 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
-        # Kết nối hạ tầng sang namespace yas-13
+        # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
-          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+          value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
         - name: backofficeBffExtraConfig.spring.data.redis.host
-          value: "redis-master.yas-13.svc.cluster.local"
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
         - name: backofficeBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
-          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
+          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -128,7 +126,7 @@ metadata:
   name: {{ printf "backoffice-ui-%s" $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -161,7 +159,7 @@ metadata:
   name: {{ printf "storefront-bff-%s" $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
@@ -186,13 +184,13 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
-        # Kết nối hạ tầng sang namespace yas-13
+        # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
-          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+          value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
         - name: storefrontBffExtraConfig.spring.data.redis.host
-          value: "redis-master.yas-13.svc.cluster.local"
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
         - name: storefrontBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
-          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
+          value: "http://keycloak-service.{{ .Values.infraNamespace }}.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -209,7 +207,7 @@ metadata:
   name: {{ printf "storefront-ui-%s" $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -242,7 +240,7 @@ metadata:
   name: {{ printf "swagger-ui-%s" $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -264,7 +262,7 @@ spec:
       selfHeal: true
 
 # 7. Core Microservices
-{{- range $service := $coreServices }}
+{{- range $service := .Values.coreServices }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -272,7 +270,7 @@ metadata:
   name: {{ printf "%s-%s" $service $envTag }}
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   source:
@@ -298,12 +296,12 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
-        # Kết nối hạ tầng sang namespace yas-13
+        # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
-          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+          value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432"
         # Cấu hình Kafka nếu cần
         - name: applicationConfig.spring.kafka.bootstrap-servers
-          value: "kafka-cluster-kafka-bootstrap.yas-13.svc.cluster.local:9092"
+          value: "kafka-cluster-kafka-bootstrap.{{ $.Values.infraNamespace }}.svc.cluster.local:9092"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
