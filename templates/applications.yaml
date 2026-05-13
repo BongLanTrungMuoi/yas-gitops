@@ -49,6 +49,11 @@ spec:
           value: "10"
         - name: livenessProbe.failureThreshold
           value: "10"
+        # Trỏ sang Keycloak ở namespace yas-13
+        - name: applicationConfig.spring.security.oauth2.resourceserver.jwt.issuer-uri
+          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
+        - name: applicationConfig.spring.lifecycle.timeout-per-shutdown-phase
+          value: "30s"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -92,6 +97,13 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
+        # Kết nối hạ tầng sang namespace yas-13
+        - name: backend.databaseConnectionUrl
+          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+        - name: backofficeBffExtraConfig.spring.data.redis.host
+          value: "redis-master.yas-13.svc.cluster.local"
+        - name: backofficeBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
+          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -166,6 +178,13 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
+        # Kết nối hạ tầng sang namespace yas-13
+        - name: backend.databaseConnectionUrl
+          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+        - name: storefrontBffExtraConfig.spring.data.redis.host
+          value: "redis-master.yas-13.svc.cluster.local"
+        - name: storefrontBffExtraConfig.spring.security.oauth2.client.provider.keycloak.issuer-uri
+          value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -271,6 +290,12 @@ spec:
           value: "10"
         - name: backend.livenessProbe.failureThreshold
           value: "10"
+        # Kết nối hạ tầng sang namespace yas-13
+        - name: backend.databaseConnectionUrl
+          value: "jdbc:postgresql://postgresql.yas-13.svc.cluster.local:5432"
+        # Cấu hình Kafka nếu cần
+        - name: applicationConfig.spring.kafka.bootstrap-servers
+          value: "kafka-cluster-kafka-bootstrap.yas-13.svc.cluster.local:9092"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
