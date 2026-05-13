@@ -27,7 +27,7 @@ coreServices:
 # Default image tags for staging
 global:
   image:
-    registry: "melyen"
+    registry: "hownamee"
     tag: "v1.0.0" # Hoặc tag release tương ứng
 
 services:
