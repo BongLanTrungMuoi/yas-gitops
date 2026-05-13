@@ -1,8 +1,8 @@
 # values-dev.yaml
 domain: "yas.local.com"
-envTag: "${ENV_TAG}"
+envTag: "dev-13"
 namespace: "yas-dev"
-infraNamespace: "${YAS_NAMESPACE}"
+infraNamespace: "yas-13"
 repoURL: "https://github.com/BongLanTrungMuoi/yas-CI-CD.git"
 targetRevision: main
 
