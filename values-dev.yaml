@@ -1,8 +1,8 @@
 # values-dev.yaml
-domain: "yas.dev.local"
-envTag: "dev"
+domain: "yas.local.com"
+envTag: "${ENV_TAG}"
 namespace: "yas-dev"
-infraNamespace: "yas-13"
+infraNamespace: "${YAS_NAMESPACE}"
 repoURL: "https://github.com/BongLanTrungMuoi/yas-CI-CD.git"
 targetRevision: main
 
@@ -51,4 +51,3 @@ services:
   recommendation: { tag: "latest" }
   webhook: { tag: "latest" }
   sampledata: { tag: "latest" }
-
