@@ -60,6 +60,14 @@ spec:
         # Trỏ Kafka sang namespace infraNamespace
         - name: applicationConfig.spring.kafka.bootstrap-servers
           value: "kafka-cluster-kafka-bootstrap.{{ .Values.infraNamespace }}.svc.cluster.local:9092"
+        - name: applicationConfig.spring.kafka.consumer.bootstrap-servers
+          value: "kafka-cluster-kafka-bootstrap.{{ .Values.infraNamespace }}.svc.cluster.local:9092"
+        - name: searchApplicationConfig.elasticsearch.url
+          value: "elasticsearch-es-http.{{ .Values.infraNamespace }}.svc.cluster.local"
+        - name: backofficeBffExtraConfig.spring.data.redis.host
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
+        - name: storefrontBffExtraConfig.spring.data.redis.host
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -106,6 +114,8 @@ spec:
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
+        - name: backofficeBffExtraConfig.spring.data.redis.host
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -183,6 +193,8 @@ spec:
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ .Values.infraNamespace }}.svc.cluster.local:5432"
+        - name: storefrontBffExtraConfig.spring.data.redis.host
+          value: "redis-master.{{ .Values.infraNamespace }}.svc.cluster.local"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
@@ -291,9 +303,17 @@ spec:
         # Kết nối hạ tầng sang namespace infraNamespace
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432"
-        # Cấu hình Kafka nếu cần
+        # Cấu hình Kafka và Elasticsearch chéo namespace
         - name: applicationConfig.spring.kafka.bootstrap-servers
           value: "kafka-cluster-kafka-bootstrap.{{ $.Values.infraNamespace }}.svc.cluster.local:9092"
+        - name: applicationConfig.spring.kafka.consumer.bootstrap-servers
+          value: "kafka-cluster-kafka-bootstrap.{{ $.Values.infraNamespace }}.svc.cluster.local:9092"
+        - name: searchApplicationConfig.elasticsearch.url
+          value: "elasticsearch-es-http.{{ $.Values.infraNamespace }}.svc.cluster.local"
+        - name: sampledataApplicationConfig.spring.datasource.product.url
+          value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432/product"
+        - name: sampledataApplicationConfig.spring.datasource.media.url
+          value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432/media"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
