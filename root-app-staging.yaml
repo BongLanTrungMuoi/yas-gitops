@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/Melyenn/yas-gitops.git"
+    repoURL: "https://github.com/BongLanTrungMuoi/yas-gitops.git"
     targetRevision: main
     path: .
     helm:
