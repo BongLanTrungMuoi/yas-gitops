@@ -54,6 +54,14 @@ spec:
           value: "http://keycloak-service.yas-13.svc.cluster.local:8080/realms/Yas"
         - name: applicationConfig.spring.lifecycle.timeout-per-shutdown-phase
           value: "30s"
+        # Trỏ Redis sang namespace yas-13 cho các BFF
+        - name: backofficeBffExtraConfig.spring.data.redis.host
+          value: "redis-master.yas-13.svc.cluster.local"
+        - name: storefrontBffExtraConfig.spring.data.redis.host
+          value: "redis-master.yas-13.svc.cluster.local"
+        # Trỏ Kafka sang namespace yas-13
+        - name: applicationConfig.spring.kafka.bootstrap-servers
+          value: "kafka-cluster-kafka-bootstrap.yas-13.svc.cluster.local:9092"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}
