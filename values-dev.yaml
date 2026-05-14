@@ -28,25 +28,25 @@ global:
     tag: "latest"
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
-  yas-configuration: { tag: "latest" }
-  backoffice-bff: { tag: "latest" }
-  backoffice-ui: { tag: "latest" }
-  storefront-bff: { tag: "latest" }
-  storefront-ui: { tag: "latest" }
-  swagger-ui: { tag: "latest" }
-  cart: { tag: "latest" }
-  customer: { tag: "latest" }
-  inventory: { tag: "latest" }
-  location: { tag: "latest" }
-  media: { tag: "latest" }
-  order: { tag: "latest" }
-  payment: { tag: "latest" }
-  product: { tag: "latest" }
-  promotion: { tag: "latest" }
-  rating: { tag: "latest" }
-  search: { tag: "latest" }
-  tax: { tag: "latest" }
-  recommendation: { tag: "latest" }
-  webhook: { tag: "latest" }
-  sampledata: { tag: "latest" }
+  yas-configuration: {tag: "latest"}
+  backoffice-bff: {tag: "latest"}
+  backoffice-ui: {tag: "latest"}
+  storefront-bff: {tag: "latest"}
+  storefront-ui: {tag: "latest"}
+  swagger-ui: {tag: "latest"}
+  cart: {tag: "latest"}
+  customer: {tag: "latest"}
+  inventory: {tag: "latest"}
+  location: {tag: "latest"}
+  media: {tag: "latest"}
+  order: {tag: "latest"}
+  payment: {tag: "latest"}
+  product: {tag: "latest"}
+  promotion: {tag: "latest"}
+  rating: {tag: "latest"}
+  search: {tag: "latest"}
+  tax: {tag: "latest"}
+  recommendation: {tag: "latest"}
+  webhook: {tag: "latest"}
+  sampledata: {tag: "latest"}
   # payment-paypal: { tag: "latest" }
