@@ -324,10 +324,6 @@ spec:
           value: "kafka-cluster-kafka-bootstrap.{{ $.Values.infraNamespace }}.svc.cluster.local:9092"
         - name: searchApplicationConfig.elasticsearch.url
           value: "elasticsearch-es-http.{{ $.Values.infraNamespace }}.svc.cluster.local"
-        - name: sampledataApplicationConfig.spring.datasource.product.url
-          value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432/product"
-        - name: sampledataApplicationConfig.spring.datasource.media.url
-          value: "jdbc:postgresql://postgresql.{{ $.Values.infraNamespace }}.svc.cluster.local:5432/media"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $namespace }}

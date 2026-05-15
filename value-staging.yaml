@@ -10,19 +10,11 @@ coreServices:
   - cart
   - customer
   - inventory
-  - location
   - media
   - order
-  - payment
   - product
-  - promotion
-  - rating
   - search
   - tax
-  - recommendation
-  - webhook
-  - sampledata
-  # - payment-paypal
 
 # Default image tags for staging
 global:
@@ -39,16 +31,8 @@ services:
   cart: { tag: "v1.0.0" }
   customer: { tag: "v1.0.0" }
   inventory: { tag: "v1.0.0" }
-  location: { tag: "v1.0.0" }
   media: { tag: "v1.0.0" }
   order: { tag: "v1.0.0" }
-  payment: { tag: "v1.0.0" }
   product: { tag: "v1.0.0" }
-  promotion: { tag: "v1.0.0" }
-  rating: { tag: "v1.0.0" }
   search: { tag: "v1.0.0" }
   tax: { tag: "v1.0.0" }
-  recommendation: { tag: "v1.0.0" }
-  webhook: { tag: "v1.0.0" }
-  sampledata: { tag: "v1.0.0" }
-  # payment-paypal: { tag: "v1.0.0" }
