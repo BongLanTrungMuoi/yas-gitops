@@ -21,30 +21,32 @@ global:
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
   yas-configuration: {tag: "latest"}
-  backoffice-bff: {tag: "main"}
-  backoffice-ui: {tag: "main"}
-  storefront-bff: {tag: "main"}
-  storefront-ui: {tag: "main"}
+  backoffice-bff: {tag: "latest"}
+  backoffice-ui: {tag: "latest"}
+  storefront-bff: {tag: "latest"}
+  storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
-  cart: {tag: "main"}
-  customer: {tag: "main"}
-  inventory: {tag: "main"}
-  media: {tag: "201786ce"}
-  order: {tag: "main"}
-  product: {tag: "main"}
-  search: {tag: "main"}
-  tax: {tag: "main"}
+  cart: {tag: "latest"}
+  customer: {tag: "latest"}
+  inventory: {tag: "latest"}
+  media: {tag: "555e2a18"}
+  order: {tag: "latest"}
+  product: {tag: "latest"}
+  search: {tag: "latest"}
+  tax: {tag: "latest"}
   location:
-    tag: main
+    tag: latest
   payment:
-    tag: main
+    tag: latest
   promotion:
-    tag: main
+    tag: latest
   rating:
-    tag: main
+    tag: latest
   recommendation:
-    tag: main
+    tag: latest
   webhook:
-    tag: main
+    tag: latest
   sampledata:
-    tag: main
+    tag: latest
+  delivery:
+    tag: latest
