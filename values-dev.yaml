@@ -22,7 +22,7 @@ global:
 services:
   yas-configuration: {tag: "latest"}
   backoffice-bff: {tag: "209ae12"}
-  backoffice-ui: {tag: "latest"}
+  backoffice-ui: {tag: "209ae12"}
   storefront-bff: {tag: "209ae12"}
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
