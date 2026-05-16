@@ -32,7 +32,7 @@ services:
   media: {tag: "c39e860"}
   order: {tag: "latest"}
   product: {tag: "latest"}
-  search: {tag: "latest"}
+  search: {tag: "209ae12"}
   tax: {tag: "latest"}
   location:
     tag: latest
