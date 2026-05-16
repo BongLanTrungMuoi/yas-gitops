@@ -31,7 +31,7 @@ services:
   inventory: {tag: "209ae12"}
   media: {tag: "c39e860"}
   order: {tag: "latest"}
-  product: {tag: "latest"}
+  product: {tag: "209ae12"}
   search: {tag: "209ae12"}
   tax: {tag: "latest"}
   location:
