@@ -29,7 +29,7 @@ services:
   cart: {tag: "latest"}
   customer: {tag: "latest"}
   inventory: {tag: "latest"}
-  media: {tag: "b2e6e88"}
+  media: {tag: "647e0fd"}
   order: {tag: "latest"}
   product: {tag: "latest"}
   search: {tag: "latest"}
