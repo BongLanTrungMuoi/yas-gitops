@@ -27,7 +27,7 @@ services:
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
   cart: {tag: "latest"}
-  customer: {tag: "latest"}
+  customer: {tag: "209ae12"}
   inventory: {tag: "209ae12"}
   media: {tag: "c39e860"}
   order: {tag: "latest"}
