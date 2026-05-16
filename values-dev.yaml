@@ -33,7 +33,7 @@ services:
   order: {tag: "209ae12"}
   product: {tag: "209ae12"}
   search: {tag: "209ae12"}
-  tax: {tag: "latest"}
+  tax: {tag: "209ae12"}
   location:
     tag: latest
   payment:
