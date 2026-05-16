@@ -30,7 +30,7 @@ services:
   customer: {tag: "209ae12"}
   inventory: {tag: "209ae12"}
   media: {tag: "c39e860"}
-  order: {tag: "latest"}
+  order: {tag: "209ae12"}
   product: {tag: "209ae12"}
   search: {tag: "209ae12"}
   tax: {tag: "latest"}
