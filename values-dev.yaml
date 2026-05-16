@@ -3,50 +3,42 @@ domain: "yas.local.com"
 envTag: "dev-13"
 namespace: "yas-dev"
 infraNamespace: "yas-13"
-repoURL: "https://github.com/BongLanTrungMuoi/yas-CI-CD.git"
+repoURL: "https://github.com/BongLanTrungMuoi/Project-02.git"
 targetRevision: main
 coreServices:
+  - product
   - cart
+  - order
   - customer
   - inventory
-  - media
-  - order
-  - product
-  - search
   - tax
+  - media
+  - search
+
 # Default image tags for dev
 global:
+  partOf: yas
+  argocdNamespace: argocd
+  project: default
+  destinationServer: https://kubernetes.default.svc
+  repoURL: https://github.com/BongLanTrungMuoi/Project-02.git
+  targetRevision: main
   image:
     tag: "latest"
+
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
   yas-configuration: {tag: "latest"}
-  backoffice-bff: {tag: "209ae12"}
-  backoffice-ui: {tag: "209ae12"}
-  storefront-bff: {tag: "209ae12"}
+  backoffice-bff: {tag: "latest"}
+  backoffice-ui: {tag: "latest"}
+  storefront-bff: {tag: "latest"}
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
-  cart: {tag: "209ae12"}
-  customer: {tag: "209ae12"}
-  inventory: {tag: "209ae12"}
-  media: {tag: "c39e860"}
-  order: {tag: "209ae12"}
-  product: {tag: "209ae12"}
-  search: {tag: "209ae12"}
-  tax: {tag: "209ae12"}
-  location:
-    tag: latest
-  payment:
-    tag: latest
-  promotion:
-    tag: latest
-  rating:
-    tag: latest
-  recommendation:
-    tag: latest
-  webhook:
-    tag: latest
-  sampledata:
-    tag: latest
-  delivery:
-    tag: latest
+  cart: {tag: "latest"}
+  customer: {tag: "latest"}
+  inventory: {tag: "latest"}
+  media: {tag: "latest"}
+  order: {tag: "latest"}
+  product: {tag: "latest"}
+  search: {tag: "latest"}
+  tax: {tag: "latest"}
