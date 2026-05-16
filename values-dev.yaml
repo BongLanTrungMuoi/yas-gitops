@@ -26,7 +26,7 @@ services:
   storefront-bff: {tag: "209ae12"}
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
-  cart: {tag: "latest"}
+  cart: {tag: "209ae12"}
   customer: {tag: "209ae12"}
   inventory: {tag: "209ae12"}
   media: {tag: "c39e860"}
