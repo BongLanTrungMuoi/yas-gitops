@@ -21,7 +21,7 @@ global:
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
   yas-configuration: {tag: "latest"}
-  backoffice-bff: {tag: "latest"}
+  backoffice-bff: {tag: "209ae12"}
   backoffice-ui: {tag: "latest"}
   storefront-bff: {tag: "latest"}
   storefront-ui: {tag: "latest"}
