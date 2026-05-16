@@ -25,7 +25,7 @@ services:
   storefront-bff: {tag: "v1.0.0"}
   storefront-ui: {tag: "v1.0.0"}
   swagger-ui: {tag: "v1.0.0"}
-  cart: {tag: "v1.0.0"}
+  cart: {tag: "rc_v1.0.0"}
   customer: {tag: "v1.0.0"}
   inventory: {tag: "v1.0.0"}
   media: {tag: "rc_v1.0.0"}
