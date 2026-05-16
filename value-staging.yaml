@@ -28,7 +28,7 @@ services:
   cart: {tag: "v1.0.0"}
   customer: {tag: "v1.0.0"}
   inventory: {tag: "v1.0.0"}
-  media: {tag: "v1.0.3"}
+  media: {tag: "v1.0.5"}
   order: {tag: "v1.0.0"}
   product: {tag: "v1.0.0"}
   search: {tag: "v1.0.0"}
