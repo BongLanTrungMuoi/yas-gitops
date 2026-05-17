@@ -55,7 +55,7 @@ services:
   storefront-bff: {tag: "e93977b"}
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
-  cart: {tag: "latest"}
+  cart: {tag: "e93977b"}
   customer: {tag: "e93977b"}
   inventory: {tag: "latest"}
   media: {tag: "e93977b"}
