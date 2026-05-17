@@ -229,7 +229,7 @@ metadata:
 spec:
   project: {{ $project }}
   source:
-    repoURL: https://charts.bitnami.com/bitnami
+    repoURL: oci://registry-1.docker.io/bitnamicharts
     chart: redis
     targetRevision: {{ .Values.infra.redis.chartVersion | quote }}
     helm:
@@ -368,8 +368,6 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index .Values.services "backoffice-bff" "tag" | default $appImageTag | quote }}
-        - name: backend.serviceMonitor.enabled
-          value: {{ .Values.observability.enabled | default false | quote }}
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: backofficeBffExtraConfig.spring.data.redis.host
@@ -444,8 +442,6 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index .Values.services "storefront-bff" "tag" | default $appImageTag | quote }}
-        - name: backend.serviceMonitor.enabled
-          value: {{ .Values.observability.enabled | default false | quote }}
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: storefrontBffExtraConfig.spring.data.redis.host
@@ -554,8 +550,6 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index $.Values.services $service "tag" | default $appImageTag | quote }}
-        - name: backend.serviceMonitor.enabled
-          value: {{ $.Values.observability.enabled | default false | quote }}
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: applicationConfig.spring.kafka.bootstrap-servers

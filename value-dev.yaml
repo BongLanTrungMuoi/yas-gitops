@@ -1,12 +1,10 @@
-# values-dev.yaml
+# value-dev.yaml
 domain: "yas.local.com"
 envTag: "dev"
 namespace: "yas-dev"
 infraNamespace: "yas-dev"
 repoURL: "https://github.com/BongLanTrungMuoi/Project-02.git"
 targetRevision: main
-observability:
-  enabled: false
 coreServices:
   - product
   - cart
@@ -17,6 +15,7 @@ coreServices:
   - media
   - search
   - sampledata
+
 infra:
   postgresql:
     replicas: 1
@@ -37,6 +36,7 @@ infra:
     bootstrapAdmin:
       username: admin
       password: admin
+
 # Default image tags for dev
 global:
   partOf: yas
@@ -47,20 +47,20 @@ global:
   targetRevision: main
   image:
     tag: "latest"
+
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
   yas-configuration: {tag: "latest"}
-  backoffice-bff: {tag: "e93977b"}
-  backoffice-ui: {tag: "e93977b"}
-  storefront-bff: {tag: "e93977b"}
-  storefront-ui: {tag: "e93977b"}
-  swagger-ui: {tag: "latest"}
-  cart: {tag: "e93977b"}
-  customer: {tag: "e93977b"}
-  inventory: {tag: "e93977b"}
-  media: {tag: "e93977b"}
-  order: {tag: "e93977b"}
-  product: {tag: "e93977b"}
-  search: {tag: "e93977b"}
-  sampledata: {tag: "d6474aa"}
-  tax: {tag: "e93977b"}
+  backoffice-bff: {tag: "latest"}
+  backoffice-ui: {tag: "latest"}
+  storefront-bff: {tag: "latest"}
+  storefront-ui: {tag: "latest"}
+  cart: {tag: "latest"}
+  customer: {tag: "latest"}
+  inventory: {tag: "latest"}
+  media: {tag: "latest"}
+  order: {tag: "latest"}
+  product: {tag: "latest"}
+  search: {tag: "latest"}
+  sampledata: {tag: "latest"}
+  tax: {tag: "latest"}
