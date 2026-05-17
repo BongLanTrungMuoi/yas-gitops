@@ -63,4 +63,4 @@ services:
   product: {tag: "latest"}
   search: {tag: "e93977b"}
   sampledata: {tag: "latest"}
-  tax: {tag: "latest"}
+  tax: {tag: "e93977b"}
