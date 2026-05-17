@@ -62,5 +62,5 @@ services:
   order: {tag: "e93977b"}
   product: {tag: "e93977b"}
   search: {tag: "e93977b"}
-  sampledata: {tag: "latest"}
+  sampledata: {tag: "d6474aa"}
   tax: {tag: "e93977b"}
