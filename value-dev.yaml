@@ -59,7 +59,7 @@ services:
   customer: {tag: "e93977b"}
   inventory: {tag: "e93977b"}
   media: {tag: "e93977b"}
-  order: {tag: "latest"}
+  order: {tag: "e93977b"}
   product: {tag: "latest"}
   search: {tag: "e93977b"}
   sampledata: {tag: "latest"}
