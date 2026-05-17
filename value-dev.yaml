@@ -61,6 +61,6 @@ services:
   media: {tag: "latest"}
   order: {tag: "latest"}
   product: {tag: "latest"}
-  search: {tag: "latest"}
+  search: {tag: "e93977b"}
   sampledata: {tag: "latest"}
   tax: {tag: "latest"}
