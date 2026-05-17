@@ -72,3 +72,5 @@ services:
     tag: rc_v1.0.0
   rating:
     tag: rc_v1.0.0
+  location:
+    tag: rc_v1.0.0
