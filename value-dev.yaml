@@ -17,7 +17,6 @@ coreServices:
   - media
   - search
   - sampledata
-
 infra:
   postgresql:
     replicas: 1
@@ -38,7 +37,6 @@ infra:
     bootstrapAdmin:
       username: admin
       password: admin
-
 # Default image tags for dev
 global:
   partOf: yas
@@ -49,13 +47,12 @@ global:
   targetRevision: main
   image:
     tag: "latest"
-
 # Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
   yas-configuration: {tag: "latest"}
   backoffice-bff: {tag: "latest"}
   backoffice-ui: {tag: "latest"}
-  storefront-bff: {tag: "latest"}
+  storefront-bff: {tag: "e93977b"}
   storefront-ui: {tag: "latest"}
   swagger-ui: {tag: "latest"}
   cart: {tag: "latest"}
