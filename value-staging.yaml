@@ -74,3 +74,5 @@ services:
     tag: rc_v1.0.0
   location:
     tag: rc_v1.0.0
+  recommendation:
+    tag: rc_v1.0.0
