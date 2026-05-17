@@ -1,8 +1,8 @@
 # values-dev.yaml
 domain: "yas.local.com"
-envTag: "dev-13"
+envTag: "dev"
 namespace: "yas-dev"
-infraNamespace: "yas-13"
+infraNamespace: "yas-dev"
 repoURL: "https://github.com/BongLanTrungMuoi/Project-02.git"
 targetRevision: main
 coreServices:
@@ -14,6 +14,28 @@ coreServices:
   - tax
   - media
   - search
+  - sampledata
+
+infra:
+  postgresql:
+    replicas: 1
+    username: yasadminuser
+    password: admin
+  kafka:
+    replicas: 1
+  zookeeper:
+    replicas: 1
+  elasticsearch:
+    replicas: 1
+  redis:
+    password: redis
+    chartVersion: "20.6.1"
+  akhq:
+    chartVersion: "0.25.1"
+  keycloak:
+    bootstrapAdmin:
+      username: admin
+      password: admin
 
 # Default image tags for dev
 global:
@@ -41,4 +63,5 @@ services:
   order: {tag: "latest"}
   product: {tag: "latest"}
   search: {tag: "latest"}
+  sampledata: {tag: "latest"}
   tax: {tag: "latest"}
