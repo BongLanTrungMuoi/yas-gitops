@@ -52,7 +52,7 @@ services:
   storefront-bff: {tag: "rc_v1.0.0"}
   storefront-ui: {tag: "rc_v1.0.0"}
   swagger-ui: {tag: "v5.32.6"}
-  cart: {tag: "rc_v1.0.0"}
+  cart: {tag: "rc_v1.0.2"}
   customer: {tag: "rc_v1.0.0"}
   inventory: {tag: "rc_v1.0.0"}
   media: {tag: "rc_v1.0.0"}
