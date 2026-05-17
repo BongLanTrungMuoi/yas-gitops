@@ -229,13 +229,21 @@ metadata:
 spec:
   project: {{ $project }}
   source:
-    repoURL: oci://registry-1.docker.io/bitnamicharts
+    repoURL: https://charts.bitnami.com/bitnami
     chart: redis
     targetRevision: {{ .Values.infra.redis.chartVersion | quote }}
     helm:
       parameters:
         - name: auth.password
           value: {{ .Values.infra.redis.password | quote }}
+        - name: architecture
+          value: standalone
+        - name: replica.replicaCount
+          value: "0"
+        - name: image.repository
+          value: bitnamilegacy/redis
+        - name: global.security.allowInsecureImages
+          value: "true"
   destination:
     server: {{ $destinationServer | quote }}
     namespace: {{ $infraNamespace }}
@@ -325,9 +333,9 @@ spec:
         - name: searchApplicationConfig.elasticsearch.url
           value: "elasticsearch-es-http.{{ $infraNamespace }}.svc.cluster.local"
         - name: backofficeBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ $infraNamespace }}.svc.cluster.local"
+          value: "redis-{{ $nameTag }}-master.{{ $infraNamespace }}.svc.cluster.local"
         - name: storefrontBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ $infraNamespace }}.svc.cluster.local"
+          value: "redis-{{ $nameTag }}-master.{{ $infraNamespace }}.svc.cluster.local"
   destination:
     server: {{ $destinationServer | quote }}
     namespace: {{ $namespace }}
@@ -368,10 +376,12 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index .Values.services "backoffice-bff" "tag" | default $appImageTag | quote }}
+        - name: backend.serviceMonitor.enabled
+          value: "false"
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: backofficeBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ $infraNamespace }}.svc.cluster.local"
+          value: "redis-{{ $nameTag }}-master.{{ $infraNamespace }}.svc.cluster.local"
   destination:
     server: {{ $destinationServer | quote }}
     namespace: {{ $namespace }}
@@ -398,7 +408,7 @@ spec:
     helm:
       parameters:
         - name: ui.ingress.enabled
-          value: "true"
+          value: "false"
         - name: ui.ingress.host
           value: {{ $backofficeHost }}
         - name: ui.extraEnvs[0].name
@@ -442,10 +452,12 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index .Values.services "storefront-bff" "tag" | default $appImageTag | quote }}
+        - name: backend.serviceMonitor.enabled
+          value: "false"
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: storefrontBffExtraConfig.spring.data.redis.host
-          value: "redis-master.{{ $infraNamespace }}.svc.cluster.local"
+          value: "redis-{{ $nameTag }}-master.{{ $infraNamespace }}.svc.cluster.local"
   destination:
     server: {{ $destinationServer | quote }}
     namespace: {{ $namespace }}
@@ -472,7 +484,7 @@ spec:
     helm:
       parameters:
         - name: ui.ingress.enabled
-          value: "true"
+          value: "false"
         - name: ui.ingress.host
           value: {{ $storefrontHost }}
         - name: ui.extraEnvs[0].name
@@ -550,6 +562,8 @@ spec:
           value: {{ $envTag | quote }}
         - name: backend.image.tag
           value: {{ index $.Values.services $service "tag" | default $appImageTag | quote }}
+        - name: backend.serviceMonitor.enabled
+          value: "false"
         - name: backend.databaseConnectionUrl
           value: "jdbc:postgresql://postgresql.{{ $infraNamespace }}.svc.cluster.local:5432"
         - name: applicationConfig.spring.kafka.bootstrap-servers
