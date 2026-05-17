@@ -53,7 +53,7 @@ services:
   backoffice-bff: {tag: "e93977b"}
   backoffice-ui: {tag: "latest"}
   storefront-bff: {tag: "e93977b"}
-  storefront-ui: {tag: "latest"}
+  storefront-ui: {tag: "e93977b"}
   swagger-ui: {tag: "latest"}
   cart: {tag: "e93977b"}
   customer: {tag: "e93977b"}
