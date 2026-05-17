@@ -68,3 +68,5 @@ services:
     tag: rc_v1.0.0
   webhook:
     tag: rc_v1.0.0
+  promotion:
+    tag: rc_v1.0.0
