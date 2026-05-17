@@ -4,7 +4,8 @@ envTag: "dev"
 namespace: "yas-dev"
 infraNamespace: "yas-dev"
 repoURL: "https://github.com/BongLanTrungMuoi/Project-02.git"
-targetRevision: main
+targetRevision: main # Usually points to a release branch/tag outside local dev
+
 coreServices:
   - product
   - cart
@@ -48,19 +49,20 @@ global:
   image:
     tag: "latest"
 
-# Cấu hình riêng cho từng service nếu cần (để phục vụ developer_build)
 services:
-  yas-configuration: {tag: "latest"}
-  backoffice-bff: {tag: "latest"}
-  backoffice-ui: {tag: "latest"}
-  storefront-bff: {tag: "latest"}
-  storefront-ui: {tag: "latest"}
-  cart: {tag: "latest"}
-  customer: {tag: "latest"}
-  inventory: {tag: "latest"}
-  media: {tag: "latest"}
-  order: {tag: "latest"}
-  product: {tag: "latest"}
-  search: {tag: "latest"}
-  sampledata: {tag: "latest"}
-  tax: {tag: "latest"}
+  yas-configuration: { tag: "latest" }
+  backoffice-bff: { tag: "latest" }
+  backoffice-ui: { tag: "latest" }
+  storefront-bff: { tag: "latest" }
+  storefront-ui: { tag: "latest" }
+  swagger-ui: { tag: "v5.32.6" }
+  cart: { tag: "latest" }
+  customer: { tag: "latest" }
+  inventory: { tag: "latest" }
+  media: { tag: "latest" }
+  order: { tag: "latest" }
+  payment: { tag: "latest" }
+  product: { tag: "latest" }
+  sampledata: { tag: "latest" }
+  search: { tag: "latest" }
+  tax: { tag: "latest" }
