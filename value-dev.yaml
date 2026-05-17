@@ -5,6 +5,8 @@ namespace: "yas-dev"
 infraNamespace: "yas-dev"
 repoURL: "https://github.com/BongLanTrungMuoi/Project-02.git"
 targetRevision: main
+observability:
+  enabled: false
 coreServices:
   - product
   - cart
