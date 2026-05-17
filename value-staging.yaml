@@ -64,3 +64,5 @@ services:
   sampledata: {tag: "rc_v1.0.0"}
   search: {tag: "rc_v1.0.0"}
   tax: {tag: "rc_v1.0.0"}
+  payment-paypal:
+    tag: rc_v1.0.0
