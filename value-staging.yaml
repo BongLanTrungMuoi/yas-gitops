@@ -58,7 +58,7 @@ services:
   media: {tag: "rc_v1.0.0"}
   order: {tag: "rc_v1.0.0"}
   payment: {tag: "rc_v1.0.0"}
-  product: {tag: "rc_v1.0.1"}
+  product: {tag: "rc_v1.0.3"}
   sampledata: {tag: "rc_v1.0.0"}
   search: {tag: "rc_v1.0.0"}
   tax: {tag: "rc_v1.0.0"}
